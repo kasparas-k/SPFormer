@@ -99,6 +99,14 @@ SPFormer
 │   │   ├── val_gt
 ```
 
+### Your own custom dataset
+
+Other datasets may not be in the `.ply` format. In this case, the Super Points can be obtained by the same procedure as in [Large-scale Point Cloud Semantic Segmentation with Superpoint Graphs](https://github.com/loicland/superpoint_graph).
+
+A stripped down version of their Super Point code has been included in this fork. To get superpoints for your point cloud's XYZ values, use the function `get_superpoints` from `data/get_superpoints.py`. Refer to the already included `data/scannetv2/prepare_data_inst.py` on how to preprocess your dataset for use with SPFormer, and use `get_superpoints` where appropriate.
+
+To run `get_superpoints` you need to install `libply_c` and `libcp`. Refer to the instructions in the [superpoint_graph](https://github.com/loicland/superpoint_graph) repository's **Requirements** section.
+
 ## Pretrained Model
 
 Download [SSTNet](https://drive.google.com/file/d/1vucwdbm6pHRGlUZAYFdK9JmnPVerjNuD/view?usp=sharing) pretrained model (We only use the Sparse 3D U-Net backbone for training).
@@ -132,7 +140,7 @@ Before visualization, you need to write the output results of inference.
 python tools/test.py configs/spf_scannet.yaml ${CHECKPOINT} --out ${SAVE_PATH}
 ```
 
-After inference, run visualization by execute the following command. 
+After inference, run visualization by execute the following command.
 
 ```
 python tools/visualization.py --prediction_path ${SAVE_PATH}
@@ -156,4 +164,3 @@ Eprint = {arXiv:2211.15766},
 ## Ancknowledgement
 
 Sincerely thanks for [SoftGroup](https://github.com/thangvubk/SoftGroup) and [SSTNet](https://github.com/Gorilla-Lab-SCUT/SSTNet) repos. This repo is build upon them.
-
